@@ -9,4 +9,3 @@ This is a simple React App with Webpack5 & Typescript.
 4. Support Axios for API calls
 5. Support Antd & Pro-Components UI Library
 6. Support Redux for State Management
-7. Support Jest for Unit Testing
