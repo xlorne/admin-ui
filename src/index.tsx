@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import {ConfigProvider} from "antd";
 import zhCN from 'antd/locale/zh_CN';
 import RoutesProvider from "@/config/routes";
+import {Provider} from "react-redux";
+import store from "@/config/redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -13,9 +15,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        <ConfigProvider locale={zhCN}>
-            <RoutesProvider/>
-        </ConfigProvider>
+        <Provider store={store}>
+            <ConfigProvider locale={zhCN}>
+                <RoutesProvider/>
+            </ConfigProvider>
+        </Provider>
     </React.StrictMode>
 );
 

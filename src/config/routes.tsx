@@ -5,6 +5,7 @@ import {loadRemoteComponent, loadRemoteScript} from "@/utils/dynamicLoader";
 import {loadPage} from "@/config/PageLoader";
 import NotFount from "@/layout/NotFount";
 import Login from "@/pages/Login";
+import Test from "@/pages/Test";
 
 const RouteContext = createContext<any>(null);
 
@@ -32,6 +33,10 @@ const RoutesProvider: React.FC = () => {
         {
             path: '/',
             element: <Home/>,
+        },
+        {
+            path: '/test',
+            element: <Test/>,
         },
         {
             path: '/login',
