@@ -4,9 +4,9 @@ import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import {ConfigProvider} from "antd";
 import zhCN from 'antd/locale/zh_CN';
-import RoutesProvider from "@/config/routes";
+import RoutesProvider from "@/config/RoutesProvider";
 import {Provider} from "react-redux";
-import store from "@/config/redux";
+import store from "@/config/Redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

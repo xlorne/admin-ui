@@ -1,11 +1,11 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {decrement, increment} from '@/config/counterSlice';
-import {RootState} from "@/config/redux";
+import {decrement, increment} from '@/config/CounterSlice';
+import {RootState} from "@/config/Redux";
 import {Link, useNavigate} from "react-router-dom";
 import {Button, Space} from "antd";
 
-const Test = () => {
+const Index = () => {
     const counter = useSelector((state: RootState) => state.counter.value);
     const dispatch = useDispatch();
 
@@ -39,4 +39,4 @@ const Test = () => {
     );
 }
 
-export default Test;
+export default Index;

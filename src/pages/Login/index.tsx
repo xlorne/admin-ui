@@ -3,7 +3,7 @@ import {ProForm, ProFormText} from "@ant-design/pro-components";
 import {login} from "@/api/account";
 import {message} from "antd";
 import {useSelector} from "react-redux";
-import {RootState} from "@/config/redux";
+import {RootState} from "@/config/Redux";
 
 
 const Login = () => {

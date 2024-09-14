@@ -1,11 +1,10 @@
 import React, {createContext, lazy, Suspense, useContext, useState} from 'react';
 import {createHashRouter, RouterProvider} from 'react-router-dom';
-import Home from '@/pages/Home';
 import {loadRemoteComponent, loadRemoteScript} from "@/utils/dynamicLoader";
 import {loadPage} from "@/config/PageLoader";
-import NotFount from "@/layout/NotFount";
+import NotFount from "@/layout/pages/NotFount";
 import Login from "@/pages/Login";
-import Test from "@/pages/Test";
+import Layout from "@/layout";
 
 const RouteContext = createContext<any>(null);
 
@@ -13,7 +12,8 @@ export const useRoutesContext = () => useContext(RouteContext);
 
 interface Router {
     path: string,
-    element: React.ReactNode
+    element: React.ReactNode,
+    children?: Router[]
 }
 
 interface PageRouter {
@@ -28,24 +28,23 @@ interface DynamicComponentRouter {
     module: string
 }
 
+
 const RoutesProvider: React.FC = () => {
     const [routes, setRoutes] = useState<Router[]>([
         {
             path: '/',
-            element: <Home/>,
-        },
-        {
-            path: '/test',
-            element: <Test/>,
+            element: <Layout/>,
+            children: [
+                {
+                    path: '/*',
+                    element: <NotFount/>,
+                }
+            ]
         },
         {
             path: '/login',
             element: <Login/>,
         },
-        {
-            path: '*',
-            element: <NotFount/>,
-        }
     ]);
 
     const addRoute = (newRoute: Router) => {
