@@ -4,6 +4,7 @@ import {decrement, increment} from '@/config/CounterSlice';
 import {RootState} from "@/config/Redux";
 import {Link, useNavigate} from "react-router-dom";
 import {Button, Space} from "antd";
+import {PageContainer} from "@ant-design/pro-components";
 
 const Index = () => {
     const counter = useSelector((state: RootState) => state.counter.value);
@@ -16,26 +17,28 @@ const Index = () => {
     }
 
     return (
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}>
+        <PageContainer>
             <div style={{
-                textAlign: 'center',
-                marginBottom: 20,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
             }}>
-                <h1>Counter: {counter}</h1>
+                <div style={{
+                    textAlign: 'center',
+                    marginBottom: 20,
+                }}>
+                    <h1>Counter: {counter}</h1>
 
-                <Link onClick={goBack} to={{}}>Go Home</Link>
+                    <Link onClick={goBack} to={{}}>Go Home</Link>
+                </div>
+
+                <Space>
+                    <Button onClick={() => dispatch(increment())}>Increment</Button>
+                    <Button onClick={() => dispatch(decrement())}>Decrement</Button>
+                </Space>
             </div>
-
-            <Space>
-                <Button onClick={() => dispatch(increment())}>Increment</Button>
-                <Button onClick={() => dispatch(decrement())}>Decrement</Button>
-            </Space>
-        </div>
+        </PageContainer>
     );
 }
 

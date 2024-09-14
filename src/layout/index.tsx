@@ -11,60 +11,28 @@ const MenuRoutes = () => {
 
     const loadMenuRoute = (menu: any) => {
         if (menu.page) {
-            return loadPage(menu.page);
-        } else {
-            if (menu.routes) {
-                const children = menu.routes.map((route: any) => {
-                    return (
-                        <Route
-                            path={route.path}
-                            element={loadMenuRoute(route)}/>
-                    );
-                });
-                return (
-                    <Route
-                        path={menu.path}
-                        children={(
-                            <>
-                                {children && children.map((child: any) => child)}
-                            </>
-                        )}/>
-                )
-            }
+            const element = loadPage(menu.page);
+            return (
+                <Route
+                    path={menu.path}
+                    element={element}
+                />
+            );
+        } else if (menu.routes) {
+            return menu.routes.map((route: any) => loadMenuRoute(route));
         }
-    }
+        return null;
+    };
 
     return (
         <Routes>
-            {menus.map((menu) => {
-
-                const element = loadMenuRoute(menu);
-
-                if (menu.page) {
-                    return (
-                        <Route element={element} path={menu.path}/>
-                    )
-                } else {
-                    if (menu.routes) {
-                        const children = menu.routes.map((route: any) => {
-                            return <Route element={loadMenuRoute(route)} path={route.path}/>;
-                        });
-                        return (
-                            <Route children={(
-                                <>
-                                    {children && children.map((child: any) => child)}
-                                </>
-                            )} path={menu.path}/>
-                        )
-                    }
-                }
-            })}
+            {menus.map((menu) => loadMenuRoute(menu))}
         </Routes>
-    )
+    );
 }
 
 export default () => {
-    const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
+    const [pathname, setPathname] = useState('/welcome');
 
     const navigate = useNavigate();
 
@@ -94,8 +62,9 @@ export default () => {
             menuItemRender={(item, dom) => (
                 <div
                     onClick={() => {
-                        // setPathname(item.path || '/welcome');
-                        navigate(item.path || '/welcome');
+                        const currentPath = item.path || '/welcome'
+                        setPathname(currentPath);
+                        navigate(currentPath);
                     }}
                 >
                     {dom}

@@ -2,10 +2,10 @@ import {CrownFilled, SmileFilled} from "@ant-design/icons";
 
 const menus = [
     {
-        path: '/home',
+        path: '/welcome',
         name: '欢迎',
         icon: <SmileFilled/>,
-        page: 'Home',
+        page: 'Welcome',
     },
     {
         path: '/admin',
@@ -18,6 +18,12 @@ const menus = [
                 name: 'Test',
                 icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
                 page: 'Test',
+            },
+            {
+                path: '/admin/login',
+                name: 'Login',
+                icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
+                page: 'Login',
             },
         ],
     },
