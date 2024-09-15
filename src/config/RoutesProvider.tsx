@@ -5,6 +5,9 @@ import {loadPage} from "@/config/PageLoader";
 import NotFount from "@/layout/pages/NotFount";
 import Login from "@/pages/login";
 import Layout from "@/layout/home";
+import {useDispatch} from "react-redux";
+import {refresh} from "@/store/MenuSlice";
+import {Menu, MenuRouteManager} from "@/config/menus";
 
 const RouteContext = createContext<any>(null);
 
@@ -30,6 +33,7 @@ interface DynamicComponentRouter {
 
 
 const RoutesProvider: React.FC = () => {
+    const dispatch = useDispatch();
     const [routes, setRoutes] = useState<Router[]>([
         {
             path: '/',
@@ -49,6 +53,11 @@ const RoutesProvider: React.FC = () => {
 
     const addRoute = (newRoute: Router) => {
         setRoutes((prevRoutes) => [...prevRoutes, newRoute]);
+    };
+
+    const addMenu = (newRoute: Menu) => {
+        MenuRouteManager.getInstance().addMenu(newRoute);
+        dispatch(refresh());
     };
 
     const removeRoute = (path: string) => {
@@ -92,7 +101,7 @@ const RoutesProvider: React.FC = () => {
     const hashRoutes = createHashRouter(routes);
 
     return (
-        <RouteContext.Provider value={{addRoute, removeRoute, addDynamicComponentRoute, addPageRoute}}>
+        <RouteContext.Provider value={{addRoute, removeRoute, addDynamicComponentRoute, addPageRoute,addMenu}}>
             <RouterProvider
                 router={hashRoutes}
             />

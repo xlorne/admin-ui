@@ -1,16 +1,18 @@
-import React, {Suspense, useState} from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import {Button, Space, Spin} from "antd";
 import {ModalForm, PageContainer, ProForm, ProFormText} from "@ant-design/pro-components";
 import ProFormUploader from "@/components/ProFormUploader";
 import {loadRemoteComponent, loadZipJsFileScript} from "@/utils/dynamicLoader";
-import {useRoutesContext} from "@/config/RoutesProvider";
 import {useNavigate} from "react-router";
+import {BugFilled} from "@ant-design/icons";
+import {useRoutesContext} from "@/config/RoutesProvider";
 
 
 const Test2 = () => {
-
     const [RemoteTestComponent, setRemoteTestComponent] = useState<React.ComponentType<any> | null>(null);
-    const {addRoute} = useRoutesContext();
+
+    const {addMenu} = useRoutesContext();
+
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const [mode, setMode] = useState('zip' as 'zip' | 'menu');
@@ -18,6 +20,14 @@ const Test2 = () => {
     const [form] = ProForm.useForm();
 
 
+    useEffect(() => {
+        if(visible){
+            form.setFieldsValue({
+                scope: "MircoApp",
+                module: "./Header",
+            })
+        }
+    }, [visible]);
 
     const loadComponent = (values: any) => {
         return new Promise((resolve, reject) => {
@@ -39,9 +49,18 @@ const Test2 = () => {
         loadComponent(values).then((Component:any) => {
             if(Component) {
                 if (mode === 'menu') {
-                    addRoute({
+                   addMenu({
                         path: '/test',
-                        element: <Component/>,
+                        name:'测试页面',
+                        icon: <BugFilled/>,
+                        routes:[
+                            {
+                                path: '/test/test1',
+                                element: <Component/>,
+                                name:'测试页面',
+                                icon: <BugFilled/>,
+                            }
+                        ]
                     });
                 }else{
                     setRemoteTestComponent(() => Component);
