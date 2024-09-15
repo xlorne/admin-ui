@@ -8,16 +8,22 @@ const menus = [
         page: 'Welcome',
     },
     {
-        path: '/admin',
+        path: '/test',
         name: '管理页',
         icon: <CrownFilled/>,
         access: 'canAdmin',
         routes: [
             {
-                path: '/admin/test',
-                name: '测试页面',
+                path: '/test/test1',
+                name: '测试页面1',
                 icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-                page: 'Test',
+                page: 'Test/test1',
+            },
+            {
+                path: '/test/test2',
+                name: '测试页面2',
+                icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
+                page: 'Test/test2',
             },
         ],
     },

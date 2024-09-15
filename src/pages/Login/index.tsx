@@ -10,14 +10,20 @@ import {
 import {initUser, login} from "@/api/account";
 import {useNavigate} from "react-router";
 import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
+import {clear} from '@/store/CounterSlice';
 
 const loginPage = () => {
     const navigate = useNavigate();
     const [form] = ProForm.useForm();
 
     const [visible, setVisible] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
+        // Clear the counter when the user logs in
+        dispatch(clear());
+
         const isMemory = localStorage.getItem('l-isMemory');
         if (isMemory === 'true') {
             const username = localStorage.getItem('l-username');

@@ -7,6 +7,7 @@ export interface CounterStore {
 export type CounterStoreAction = {
     increment: (state: CounterStore) => void;
     decrement: (state: CounterStore) => void;
+    clear: (state: CounterStore) => void;
 }
 
 export const counterSlice = createSlice<CounterStore, CounterStoreAction, "counter", {}>({
@@ -21,8 +22,11 @@ export const counterSlice = createSlice<CounterStore, CounterStoreAction, "count
         decrement: (state) => {
             state.value -= 1;
         },
+        clear: (state) => {
+            state.value = 0;
+        },
     },
 });
 
-export const {increment, decrement} = counterSlice.actions;
+export const {increment, decrement, clear} = counterSlice.actions;
 

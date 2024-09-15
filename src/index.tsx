@@ -4,7 +4,7 @@ import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import RoutesProvider from "@/config/RoutesProvider";
 import {Provider} from "react-redux";
-import store from "@/config/Redux";
+import store from "@/store/Redux";
 import {ConfigProvider} from "antd";
 import zhCN from 'antd/es/locale/zh_CN';
 import {theme} from "@/config/theme";

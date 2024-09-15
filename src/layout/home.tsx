@@ -7,6 +7,11 @@ import {loadPage} from "@/config/PageLoader";
 import AvatarHeader from "@/layout/avatar";
 import {loadHeaderAction} from "@/layout/action";
 import {config} from "@/config/theme";
+import "./home.scss";
+
+
+const welcomePath = config.welcomePath;
+const loginPath = config.loginPath;
 
 const MenuRoutes = () => {
 
@@ -33,14 +38,14 @@ const MenuRoutes = () => {
 }
 
 const HomeLayout = () => {
-    const [pathname, setPathname] = useState('/welcome');
+    const [pathname, setPathname] = useState(welcomePath);
 
     const navigate = useNavigate();
 
     return (
         <ProLayout
-            siderWidth={216}
-            layout={"mix"}
+            siderWidth={config.siderWidth}
+            layout={config.layout}
             route={{
                 routes: menus,
             }}
@@ -49,6 +54,21 @@ const HomeLayout = () => {
             }}
             title={config.title}
             logo={config.logo}
+            waterMarkProps={{
+                content: config.waterMark,
+            }}
+            breadcrumbProps={{
+                itemRender: (route, params, routes, paths) => {
+                    return (
+                        <label
+                            className={"breadcrumb-item"}
+                            onClick={() => {
+                                return;
+                            }}
+                        >{route.breadcrumbName}</label>
+                    );
+                }
+            }}
             avatarProps={{
                 render: (props, defaultDom) => {
                     return (
@@ -59,10 +79,16 @@ const HomeLayout = () => {
             actionsRender={(props) => {
                 return loadHeaderAction(props);
             }}
+            onPageChange={(location) => {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    navigate(loginPath, {replace: true});
+                }
+            }}
             menuItemRender={(item, dom) => (
                 <div
                     onClick={() => {
-                        const currentPath = item.path || '/welcome'
+                        const currentPath = item.path || welcomePath
                         setPathname(currentPath);
                         navigate(currentPath);
                     }}

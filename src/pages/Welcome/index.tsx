@@ -4,7 +4,7 @@ import './index.scss';
 import {Link} from "react-router-dom";
 import {Space} from "antd";
 import {useSelector} from "react-redux";
-import {RootState} from "@/config/Redux";
+import {RootState} from "@/store/Redux";
 import {PageContainer} from "@ant-design/pro-components";
 
 const Index = () => {

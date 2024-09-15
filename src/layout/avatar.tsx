@@ -60,7 +60,9 @@ const AvatarHeader: React.FC<AvatarHeaderProps> = (props) => {
                 }}
             >
                 <div>
-                    <Avatar src={avatar}/>
+                    <Avatar src={avatar} style={{
+                        marginRight:10
+                    }}/>
                     {username}
                 </div>
             </HeaderDropdown>
