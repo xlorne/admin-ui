@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, {Suspense, useState} from "react";
 import * as Babel from "@babel/standalone";
-import {Button, Col, Input, Row, Select} from "antd";
+import {Button, Col, Input, Row, Select, Spin} from "antd";
 import ReactDOM from "react-dom/client";
 import Editor from "@/components/Editor";
 import {PageContainer} from "@ant-design/pro-components";
 
 const Test1 = () => {
+
+    const [RemoteTestComponent, setRemoteTestComponent] = useState<React.ComponentType<any> | null>(null);
 
     const defaultCode =
         `
@@ -22,8 +24,7 @@ const Test = () => {
         </div>
     );
 };
-const root = ReactDOM.createRoot(document.getElementById('content'));
-root.render(<Test/>);
+callback(Test);
 `;
     const [code, setCode] = useState(defaultCode); // 直接在代码中返回 Test 组件实例
 
@@ -34,6 +35,10 @@ root.render(<Test/>);
                 presets: ["react"]
             }).code;
 
+            const callback = (Component: any) => {
+                setRemoteTestComponent(() => Component);
+            }
+
             // 创建一个包含所有组件的对象
             const components = [
                 React,
@@ -41,6 +46,7 @@ root.render(<Test/>);
                 Button,
                 Input,
                 Select,
+                callback
             ];
 
             const componentsName = [
@@ -49,6 +55,7 @@ root.render(<Test/>);
                 "Button",
                 "Input",
                 "Select",
+                "callback"
             ]
 
             // 使用 new Function 执行编译后的代码
@@ -89,10 +96,11 @@ root.render(<Test/>);
                    />
                </Col>
                 <Col span={12}>
-                    <div id="content" style={{
-                        padding: 20,
-                        border: '1px solid #f0f0f0'
-                    }}></div>
+                    {RemoteTestComponent && (
+                        <Suspense fallback={<Spin tip={"Loading"} size={"large"}/>}>
+                            <RemoteTestComponent/>
+                        </Suspense>
+                    )}
                 </Col>
             </Row>
         </PageContainer>
