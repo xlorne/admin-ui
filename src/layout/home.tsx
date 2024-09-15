@@ -2,9 +2,9 @@ import {ActionType, ProLayout} from '@ant-design/pro-components';
 import React, {useEffect, useRef, useState} from 'react';
 import {Routes} from "react-router";
 import {useNavigate} from "react-router-dom";
-import {MenuRouteManager} from "@/config/menus";
-import AvatarHeader from "@/layout/avatar";
-import {loadHeaderAction} from "@/layout/action";
+import {MenuRouteManager} from "@/components/Layout/MenuRouteManager";
+import AvatarHeader from "@/components/Layout/AvatarHeader";
+import {loadHeaderAction} from "@/components/Layout/HeaderAction";
 import {config} from "@/config/theme";
 import "./home.scss";
 import {useSelector} from "react-redux";
@@ -24,12 +24,8 @@ const HomeLayout = () => {
 
     const username = localStorage.getItem('username');
 
-    const [routes, setRoutes] = useState<any[]>([]);
     useEffect(() => {
-        console.log(menuVersion);
         actionRef.current?.reload();
-        const newRoutes = MenuRouteManager.getInstance().getRoutes();
-        setRoutes(newRoutes);
     }, [menuVersion]);
 
     useEffect(() => {
@@ -44,27 +40,28 @@ const HomeLayout = () => {
             location={{
                 pathname,
             }}
-            route={{
-                routes: MenuRouteManager.getInstance().getMenus()
-            }}
-            postMenuData={(menusData)=>{
-                return MenuRouteManager.getInstance().getMenus()
-            }}
             title={config.title}
             logo={config.logo}
             actionRef={actionRef}
             waterMarkProps={{
                 content: username || config.waterMark,
             }}
+            menu={{
+                request: async () => {
+                    return MenuRouteManager.getInstance().getMenus();
+                }
+            }}
             breadcrumbProps={{
-                itemRender: (route, params, routes, paths) => {
+                itemRender: (route:any, params, routes, paths) => {
                     return (
                         <label
                             className={"breadcrumb-item"}
                             onClick={() => {
                                 return;
                             }}
-                        >{route.breadcrumbName}</label>
+                        >
+                            {route.breadcrumbName}
+                        </label>
                     );
                 }
             }}
@@ -97,7 +94,7 @@ const HomeLayout = () => {
             )}
         >
             <Routes>
-                {routes}
+                {MenuRouteManager.getInstance().getRoutes()}
             </Routes>
         </ProLayout>
     );

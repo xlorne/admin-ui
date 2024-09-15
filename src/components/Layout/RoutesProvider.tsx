@@ -1,13 +1,13 @@
 import React, {createContext, lazy, Suspense, useContext, useState} from 'react';
 import {createHashRouter, RouterProvider} from 'react-router-dom';
 import {loadRemoteComponent, loadRemoteScript} from "@/utils/dynamicLoader";
-import {loadPage} from "@/config/PageLoader";
+import {loadPage} from "@/components/Layout/PageLoader";
 import NotFount from "@/layout/pages/NotFount";
 import Login from "@/pages/login";
 import Layout from "@/layout/home";
 import {useDispatch} from "react-redux";
 import {refresh} from "@/store/MenuSlice";
-import {Menu, MenuRouteManager} from "@/config/menus";
+import {Menu, MenuRouteManager} from "@/components/Layout/MenuRouteManager";
 
 const RouteContext = createContext<any>(null);
 

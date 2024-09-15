@@ -3,9 +3,8 @@ import {Button, Space, Spin} from "antd";
 import {ModalForm, PageContainer, ProForm, ProFormText} from "@ant-design/pro-components";
 import ProFormUploader from "@/components/ProFormUploader";
 import {loadRemoteComponent, loadZipJsFileScript} from "@/utils/dynamicLoader";
-import {useNavigate} from "react-router";
 import {BugFilled} from "@ant-design/icons";
-import {useRoutesContext} from "@/config/RoutesProvider";
+import {useRoutesContext} from "@/components/Layout/RoutesProvider";
 
 
 const Test2 = () => {
@@ -13,12 +12,10 @@ const Test2 = () => {
 
     const {addMenu} = useRoutesContext();
 
-    const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const [mode, setMode] = useState('zip' as 'zip' | 'menu');
 
     const [form] = ProForm.useForm();
-
 
     useEffect(() => {
         if(visible){
@@ -56,9 +53,12 @@ const Test2 = () => {
                         routes:[
                             {
                                 path: '/test/test1',
-                                element: <Component/>,
-                                name:'测试页面',
-                                icon: <BugFilled/>,
+                                element: (
+                                    <PageContainer>
+                                        <Component/>
+                                    </PageContainer>
+                                ),
+                                name:'测试页面1',
                             }
                         ]
                     });
@@ -75,14 +75,16 @@ const Test2 = () => {
             <div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center',
                     alignItems: 'center',
-                    height: '100vh',
                     flexDirection: 'column',
                     gap: '50px',
                 }}
             >
-                Dynamic Load Zip Component Page
+                <h1
+                    style={{
+                        textAlign: 'center'
+                    }}
+                > 动态加载组件 </h1>
 
                 {RemoteTestComponent && (
                     <Suspense fallback={<Spin tip={"Loading"} size={"large"}/>}>
@@ -101,7 +103,7 @@ const Test2 = () => {
                             setVisible(true);
                         }}
                     >
-                        upload zip component
+                        上传zip组件到本界面
                     </Button>
 
                     <Button
@@ -110,15 +112,7 @@ const Test2 = () => {
                             setVisible(true);
                         }}
                     >
-                        upload menu component
-                    </Button>
-
-                    <Button
-                        onClick={() => {
-                            navigate('/test');
-                        }}
-                    >
-                        go test
+                        上传zip组件到菜单
                     </Button>
 
                 </Space>
@@ -126,7 +120,7 @@ const Test2 = () => {
 
                 <ModalForm
                     form={form}
-                    title={"upload component"}
+                    title={"上传zip组件"}
                     open={visible}
                     modalProps={{
                         onCancel: () => {
@@ -164,7 +158,7 @@ const Test2 = () => {
                     />
 
                     <ProFormUploader
-                        label={"component zip file"}
+                        label={"组件文件包"}
                         name={"upload"}
                         max={1}
                         accept={".zip"}

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
-import RoutesProvider from "@/config/RoutesProvider";
+import RoutesProvider from "@/components/Layout/RoutesProvider";
 import {Provider} from "react-redux";
 import store from "@/store/Redux";
 import {ConfigProvider} from "antd";

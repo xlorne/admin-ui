@@ -64,7 +64,7 @@ const Test1 = () => {
                 style={{
                     textAlign: 'center'
                 }}
-            > Dynamic Code To Component </h1>
+            > 动态加载代码 </h1>
             <div>
                 <Editor
                     value={code}
