@@ -15,15 +15,9 @@ const menus = [
         routes: [
             {
                 path: '/admin/test',
-                name: 'Test',
+                name: '测试页面',
                 icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
                 page: 'Test',
-            },
-            {
-                path: '/admin/login',
-                name: 'Login',
-                icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-                page: 'Login',
             },
         ],
     },

@@ -6,6 +6,7 @@ import menus from "@/config/menus";
 import {loadPage} from "@/config/PageLoader";
 import AvatarHeader from "@/layout/avatar";
 import {loadHeaderAction} from "@/layout/action";
+import {config} from "@/config/theme";
 
 const MenuRoutes = () => {
 
@@ -46,6 +47,8 @@ const HomeLayout = () => {
             location={{
                 pathname,
             }}
+            title={config.title}
+            logo={config.logo}
             avatarProps={{
                 render: (props, defaultDom) => {
                     return (
