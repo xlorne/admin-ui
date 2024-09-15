@@ -1,11 +1,11 @@
-import {GithubFilled, InfoCircleFilled, QuestionCircleFilled,} from '@ant-design/icons';
 import {ProLayout} from '@ant-design/pro-components';
 import React, {useState} from 'react';
 import {Route, Routes} from "react-router";
 import {useNavigate} from "react-router-dom";
 import menus from "@/config/menus";
 import {loadPage} from "@/config/PageLoader";
-
+import AvatarHeader from "@/layout/avatar";
+import {loadHeaderAction} from "@/layout/action";
 
 const MenuRoutes = () => {
 
@@ -31,7 +31,7 @@ const MenuRoutes = () => {
     );
 }
 
-export default () => {
+const HomeLayout = () => {
     const [pathname, setPathname] = useState('/welcome');
 
     const navigate = useNavigate();
@@ -47,17 +47,14 @@ export default () => {
                 pathname,
             }}
             avatarProps={{
-                src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-                title: '七妮妮',
-                size: 'small',
+                render: (props, defaultDom) => {
+                    return (
+                        <AvatarHeader props={props}/>
+                    )
+                }
             }}
             actionsRender={(props) => {
-                if (props.isMobile) return [];
-                return [
-                    <InfoCircleFilled key="InfoCircleFilled"/>,
-                    <QuestionCircleFilled key="QuestionCircleFilled"/>,
-                    <GithubFilled key="GithubFilled"/>,
-                ];
+                return loadHeaderAction(props);
             }}
             menuItemRender={(item, dom) => (
                 <div
@@ -75,3 +72,5 @@ export default () => {
         </ProLayout>
     );
 };
+
+export default HomeLayout;

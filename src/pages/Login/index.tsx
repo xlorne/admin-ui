@@ -1,14 +1,16 @@
 import React from "react";
 import {PageContainer, ProForm, ProFormText} from "@ant-design/pro-components";
-import {login} from "@/api/account";
+import {initUser, login} from "@/api/account";
 import {message} from "antd";
 import {useSelector} from "react-redux";
 import {RootState} from "@/config/Redux";
+import {useNavigate} from "react-router-dom";
 
 
 const Login = () => {
 
     const counter = useSelector((state: RootState) => state.counter.value);
+    const navigate = useNavigate();
 
     return (
         <PageContainer>
@@ -19,6 +21,8 @@ const Login = () => {
                         message.error(res.errMessage);
                     } else {
                         message.success('登录成功');
+                        initUser(res.data);
+                        navigate('/welcome', {replace: true});
                     }
                 }}
             >
