@@ -1,27 +1,53 @@
 import React, {Suspense, useState} from "react";
-import {Button} from "antd";
+import {Button, Space, Spin} from "antd";
 import {ModalForm, PageContainer, ProForm, ProFormText} from "@ant-design/pro-components";
 import ProFormUploader from "@/components/ProFormUploader";
 import {loadRemoteComponent, loadZipJsFileScript} from "@/utils/dynamicLoader";
+import {useRoutesContext} from "@/config/RoutesProvider";
+import {useNavigate} from "react-router";
 
 
 const Test2 = () => {
 
     const [RemoteTestComponent, setRemoteTestComponent] = useState<React.ComponentType<any> | null>(null);
+    const {addRoute} = useRoutesContext();
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
+    const [mode, setMode] = useState('zip' as 'zip' | 'menu');
 
     const [form] = ProForm.useForm();
 
-    const handlerLoadComponent = async (values: any) => {
-        const base64 = values.component;
-        const scope = values.scope;
-        const module = values.module;
-        loadZipJsFileScript(base64).then(() => {
-            loadRemoteComponent(scope, module).then((ComponentModule: any) => {
-                const Component = ComponentModule.default || ComponentModule;
-                setRemoteTestComponent(() => Component);
-                setVisible(false);
+
+
+    const loadComponent = (values: any) => {
+        return new Promise((resolve, reject) => {
+            const base64 = values.component;
+            const scope = values.scope;
+            const module = values.module;
+            loadZipJsFileScript(base64).then(() => {
+                loadRemoteComponent(scope, module).then((ComponentModule: any) => {
+                    const Component = ComponentModule.default || ComponentModule;
+                    resolve(Component);
+                }).catch(e => {
+                    reject(e);
+                });
             });
+        });
+    }
+
+    const handlerLoadComponent = async (values: any) => {
+        loadComponent(values).then((Component:any) => {
+            if(Component) {
+                if (mode === 'menu') {
+                    addRoute({
+                        path: '/test',
+                        element: <Component/>,
+                    });
+                }else{
+                    setRemoteTestComponent(() => Component);
+                }
+            }
+            setVisible(false);
         });
     }
 
@@ -37,20 +63,47 @@ const Test2 = () => {
                     gap: '50px',
                 }}
             >
-                Hello Page
+                Dynamic Load Zip Component Page
 
                 {RemoteTestComponent && (
-                    <Suspense fallback={<div>Loading Header...</div>}>
-                        <RemoteTestComponent title={"Remote Component Header"} onClick={() => {
-                            alert('click');
-                        }}/>
+                    <Suspense fallback={<Spin tip={"Loading"} size={"large"}/>}>
+                        <RemoteTestComponent
+                            title={"Remote Component Header"}
+                            onClick={() => {
+                                alert('click');
+                            }}
+                        />
                     </Suspense>
                 )}
-                <Button
-                    onClick={() => {
-                        setVisible(true);
-                    }}
-                >upload zip component</Button>
+                <Space>
+                    <Button
+                        onClick={() => {
+                            setMode('zip');
+                            setVisible(true);
+                        }}
+                    >
+                        upload zip component
+                    </Button>
+
+                    <Button
+                        onClick={() => {
+                            setMode('menu');
+                            setVisible(true);
+                        }}
+                    >
+                        upload menu component
+                    </Button>
+
+                    <Button
+                        onClick={() => {
+                            navigate('/test');
+                        }}
+                    >
+                        go test
+                    </Button>
+
+                </Space>
+
 
                 <ModalForm
                     form={form}
