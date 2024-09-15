@@ -23,6 +23,6 @@ export const config = {
     // 侧边栏布局
     layout: 'mix' as 'side' | 'top' | 'mix',
     // 水印
-    waterMark: localStorage.getItem('username') || 'default waterMark',
+    waterMark: 'default waterMark',
 }
 

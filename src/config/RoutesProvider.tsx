@@ -1,4 +1,4 @@
-import React, {createContext, lazy, Suspense, useContext, useEffect, useState} from 'react';
+import React, {createContext, lazy, Suspense, useContext, useState} from 'react';
 import {createHashRouter, RouterProvider} from 'react-router-dom';
 import {loadRemoteComponent, loadRemoteScript} from "@/utils/dynamicLoader";
 import {loadPage} from "@/config/PageLoader";
@@ -90,10 +90,6 @@ const RoutesProvider: React.FC = () => {
     }
 
     const hashRoutes = createHashRouter(routes);
-
-    useEffect(() => {
-        console.log(routes)
-    }, [routes]);
 
     return (
         <RouteContext.Provider value={{addRoute, removeRoute, addDynamicComponentRoute, addPageRoute}}>

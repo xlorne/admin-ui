@@ -16,6 +16,8 @@ const HomeLayout = () => {
 
     const navigate = useNavigate();
 
+    const username = localStorage.getItem('username');
+
     useEffect(() => {
         const path = window.location.hash.replace('#', '');
         setPathname(path);
@@ -34,7 +36,7 @@ const HomeLayout = () => {
             title={config.title}
             logo={config.logo}
             waterMarkProps={{
-                content: config.waterMark,
+                content: username || config.waterMark,
             }}
             breadcrumbProps={{
                 itemRender: (route, params, routes, paths) => {

@@ -26,7 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "webpack serve --config webpack.config.dev.js --open",
+    "start": "webpack serve --config webpack.config.mock.js --open",
+    "dev": "webpack serve --config webpack.config.dev.js --open",
     "build": "webpack --mode production --config webpack.config.prod.js"
   },
   "eslintConfig": {
@@ -50,7 +51,9 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
+    "express": "^4.21.0",
     "html-webpack-plugin": "^5.6.0",
+    "mockjs": "^1.1.0",
     "monaco-editor-webpack-plugin": "^7.1.0",
     "sass": "^1.78.0",
     "sass-loader": "^16.0.1",
@@ -59,6 +62,7 @@
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0",
-    "webpack-merge": "^6.0.1"
+    "webpack-merge": "^6.0.1",
+    "webpack-mock-server": "^1.0.21"
   }
 }
