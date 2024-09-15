@@ -9,6 +9,7 @@ import {config} from "@/config/theme";
 import "./home.scss";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
+import AccessControl from "@/utils/accessControl";
 
 const welcomePath = config.welcomePath;
 const loginPath = config.loginPath;
@@ -25,6 +26,7 @@ const HomeLayout = () => {
     const username = localStorage.getItem('username');
 
     useEffect(() => {
+        MenuRouteManager.getInstance().refresh();
         actionRef.current?.reload();
     }, [menuVersion]);
 
@@ -52,7 +54,7 @@ const HomeLayout = () => {
                 }
             }}
             breadcrumbProps={{
-                itemRender: (route:any, params, routes, paths) => {
+                itemRender: (route: any, params, routes, paths) => {
                     return (
                         <label
                             className={"breadcrumb-item"}

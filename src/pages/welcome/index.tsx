@@ -4,6 +4,7 @@ import './index.scss';
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
 import {PageContainer} from "@ant-design/pro-components";
+import Access from "@/components/Assess";
 
 const Index = () => {
 
@@ -11,6 +12,11 @@ const Index = () => {
 
     return (
         <PageContainer>
+
+            <Access hasRole={['ROLE_ADMIN']}>
+                hi, admin manager
+            </Access>
+
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>

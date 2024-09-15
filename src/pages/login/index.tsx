@@ -11,7 +11,8 @@ import {initUser, login} from "@/api/account";
 import {useNavigate} from "react-router";
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {clear} from '@/store/CounterSlice';
+import {refresh} from '@/store/MenuSlice';
+import {config} from "@/config/theme";
 
 const loginPage = () => {
     const navigate = useNavigate();
@@ -21,8 +22,6 @@ const loginPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // Clear the counter when the user logs in
-        dispatch(clear());
 
         const isMemory = localStorage.getItem('l-isMemory');
         if (isMemory === 'true') {
@@ -50,8 +49,12 @@ const loginPage = () => {
                 onFinish={async (values) => {
                     const res = await login(values);
                     if (res.success) {
+                        // 初始化用户信息
                         initUser(res.data);
-                        navigate('/welcome');
+                        // 重新加载菜单
+                        dispatch(refresh());
+                        // 跳转到欢迎页
+                        navigate(config.welcomePath);
 
                         localStorage.setItem('l-isMemory', values.isMemory);
                         if (values.isMemory) {

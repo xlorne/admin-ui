@@ -17,6 +17,7 @@ export const menus = [
                 path: '/redux/test1',
                 name: '测试页面1',
                 page: 'redux/test1',
+                roles: ['ROLE_ADMIN'],
             },
             {
                 path: '/redux/test2',
@@ -29,6 +30,7 @@ export const menus = [
         path: '/dynamic',
         name: '动态加载',
         icon: <CrownFilled/>,
+        roles: ['ROLE_ADMIN'],
         routes: [
             {
                 path: '/dynamic/test1',

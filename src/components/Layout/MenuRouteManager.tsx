@@ -2,8 +2,15 @@ import React from "react";
 import {loadPage} from "@/components/Layout/PageLoader";
 import {Route} from "react-router";
 import {menus} from "@/config/menus";
+import AccessControl from "@/utils/accessControl";
+import { cloneDeep } from 'lodash';
 
 const loadMenuRoute = (menu: any) => {
+    if (menu.roles) {
+        if (!AccessControl.menuHasRole(menu)) {
+            return null;
+        }
+    }
     if (menu.page) {
         const element = loadPage(menu.page);
         return (
@@ -34,7 +41,8 @@ export interface Menu {
     element: React.ReactNode,
     name: string,
     icon?: React.ReactNode | string,
-    routes?: Menu[]
+    routes?: Menu[],
+    roles?: string[],
 }
 
 // 菜单路由管理器
@@ -67,7 +75,7 @@ export class MenuRouteManager {
     }
 
     public getRoutes() {
-        if(this.currentVersion === this.version) {
+        if (this.currentVersion === this.version) {
             return this.routes;
         }
         this.routes = this.menus.map((menu: any) => loadMenuRoute(menu));
@@ -76,11 +84,33 @@ export class MenuRouteManager {
     }
 
     public getMenus() {
-        return this.menus;
+        const accessFilter = (menu: any) => {
+            if (menu.roles) {
+                return AccessControl.menuHasRole(menu);
+            }
+            if (menu.routes) {
+                menu.routes = menu.routes.filter((route: any) => {
+                    return accessFilter(route);
+                });
+                return menu.routes.length > 0;
+            }
+            return true;
+        }
+        if (this.menus.length === 0) {
+            return [];
+        }
+        const newMenus = cloneDeep(this.menus);
+        return newMenus.filter((menu: any) => {
+            return accessFilter(menu);
+        });
     }
 
     public addMenu(menu: Menu) {
         this.menus.push(menu);
+        this.version++;
+    }
+
+    public refresh() {
         this.version++;
     }
 }
