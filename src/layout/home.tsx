@@ -20,6 +20,7 @@ const MenuRoutes = () => {
             const element = loadPage(menu.page);
             return (
                 <Route
+                    key={menu.path}
                     path={menu.path}
                     element={element}
                 />

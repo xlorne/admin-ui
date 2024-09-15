@@ -2,11 +2,18 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const {dependencies} = require("./package.json");
 
 module.exports = {
     entry: './src/index.tsx',
+    ignoreWarnings: [
+        {
+            module: /@babel\/standalone/, // 忽略来自 @babel/standalone 的警告
+            message: /Critical dependency: the request of a dependency is an expression/,
+        },
+    ],
     devServer: {
         port: 3000,
     },
@@ -24,11 +31,11 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.s[ac]ss$/,
+                test: /\.(css|s[ac]ss)$/,  // 匹配 .css, .scss, .sass 文件
                 use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader',
+                    'style-loader',  // 将 CSS 插入到 DOM 中
+                    'css-loader',    // 解析 CSS
+                    'sass-loader',   // 解析 Sass 文件（对于 .scss 和 .sass 文件）
                 ],
             },
             {
@@ -49,6 +56,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new MonacoWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),

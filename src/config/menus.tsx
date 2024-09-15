@@ -5,7 +5,7 @@ const menus = [
         path: '/welcome',
         name: '欢迎',
         icon: <SmileFilled/>,
-        page: 'Welcome',
+        page: 'welcome',
     },
     {
         path: '/test',
@@ -16,15 +16,32 @@ const menus = [
             {
                 path: '/test/test1',
                 name: '测试页面1',
-                icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-                page: 'Test/test1',
+                page: 'test/test1',
             },
             {
                 path: '/test/test2',
                 name: '测试页面2',
-                icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-                page: 'Test/test2',
+                page: 'test/test2',
             },
+        ],
+    },
+    {
+        path: '/dynamic',
+        name: '动态加载',
+        icon: <CrownFilled/>,
+        access: 'canAdmin',
+        routes: [
+            {
+                path: '/dynamic/test1',
+                name: '动态加载1',
+                page: 'dynamic/test1',
+            },
+            {
+                path: '/dynamic/test2',
+                name: '动态加载2',
+                page: 'dynamic/test2',
+            },
+
         ],
     },
 ]

@@ -3,7 +3,7 @@ import {createHashRouter, RouterProvider} from 'react-router-dom';
 import {loadRemoteComponent, loadRemoteScript} from "@/utils/dynamicLoader";
 import {loadPage} from "@/config/PageLoader";
 import NotFount from "@/layout/pages/NotFount";
-import Login from "@/pages/Login";
+import Login from "@/pages/login";
 import Layout from "@/layout/home";
 
 const RouteContext = createContext<any>(null);
