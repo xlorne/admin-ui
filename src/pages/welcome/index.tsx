@@ -1,8 +1,6 @@
 import React from 'react';
 import logo from '@/assets/logo.svg';
 import './index.scss';
-import {Link} from "react-router-dom";
-import {Space} from "antd";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
 import {PageContainer} from "@ant-design/pro-components";
@@ -17,25 +15,8 @@ const Index = () => {
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <p>
-                        Redux counter:{counter}
+                        Redux counter: {counter}
                     </p>
-
-                    <Space>
-                        <Link
-                            className="App-link"
-                            to={"/login"}
-                        >
-                            go login
-                        </Link>
-
-                        |
-                        <Link
-                            className="App-link"
-                            to={"/test"}
-                        >
-                            go test
-                        </Link>
-                    </Space>
                 </header>
             </div>
         </PageContainer>

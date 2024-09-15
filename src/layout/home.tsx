@@ -1,47 +1,25 @@
 import {ProLayout} from '@ant-design/pro-components';
-import React, {useState} from 'react';
-import {Route, Routes} from "react-router";
+import React, {useEffect, useState} from 'react';
+import {Routes} from "react-router";
 import {useNavigate} from "react-router-dom";
-import menus from "@/config/menus";
-import {loadPage} from "@/config/PageLoader";
+import {menus, routes} from "@/config/menus";
 import AvatarHeader from "@/layout/avatar";
 import {loadHeaderAction} from "@/layout/action";
 import {config} from "@/config/theme";
 import "./home.scss";
 
-
 const welcomePath = config.welcomePath;
 const loginPath = config.loginPath;
-
-const MenuRoutes = () => {
-
-    const loadMenuRoute = (menu: any) => {
-        if (menu.page) {
-            const element = loadPage(menu.page);
-            return (
-                <Route
-                    key={menu.path}
-                    path={menu.path}
-                    element={element}
-                />
-            );
-        } else if (menu.routes) {
-            return menu.routes.map((route: any) => loadMenuRoute(route));
-        }
-        return null;
-    };
-
-    return (
-        <Routes>
-            {menus.map((menu) => loadMenuRoute(menu))}
-        </Routes>
-    );
-}
 
 const HomeLayout = () => {
     const [pathname, setPathname] = useState(welcomePath);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const path = window.location.hash.replace('#', '');
+        setPathname(path);
+    }, [])
 
     return (
         <ProLayout
@@ -98,7 +76,9 @@ const HomeLayout = () => {
                 </div>
             )}
         >
-            <MenuRoutes/>
+            <Routes>
+                {routes}
+            </Routes>
         </ProLayout>
     );
 };
