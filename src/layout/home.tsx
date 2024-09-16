@@ -9,7 +9,6 @@ import {config} from "@/config/theme";
 import "./home.scss";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
-import AccessControl from "@/utils/accessControl";
 
 const welcomePath = config.welcomePath;
 const loginPath = config.loginPath;
@@ -26,14 +25,12 @@ const HomeLayout = () => {
     const username = localStorage.getItem('username');
 
     useEffect(() => {
+        const path = window.location.hash.replace('#', '');
+        setPathname(path);
         MenuRouteManager.getInstance().refresh();
         actionRef.current?.reload();
     }, [menuVersion]);
 
-    useEffect(() => {
-        const path = window.location.hash.replace('#', '');
-        setPathname(path);
-    }, []);
 
     return (
         <ProLayout
@@ -50,6 +47,7 @@ const HomeLayout = () => {
             }}
             menu={{
                 request: async () => {
+                    console.log('load menus ...');
                     return MenuRouteManager.getInstance().getMenus();
                 }
             }}

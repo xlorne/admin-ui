@@ -1,13 +1,33 @@
 import React from "react";
-import {PageContainer} from "@ant-design/pro-components";
+import {Button, Result} from "antd";
+import {useNavigate} from "react-router";
+import {config} from "@/config/theme";
+import {useDispatch} from "react-redux";
+import {refresh} from "@/store/MenuSlice";
 
 const NotFount = () => {
-    window.document.title = '404 Not Found';
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const goHome = () => {
+        navigate(config.welcomePath, {replace: true});
+        dispatch(refresh());
+    }
 
     return (
-        <PageContainer>
-            <h3>Error 404 ,Page Not Found</h3>
-        </PageContainer>
+        <Result
+            status="404"
+            title="404"
+            subTitle="Sorry, the page you visited does not exist."
+            extra={(
+                <Button
+                    type="primary"
+                    onClick={goHome}
+                >
+                    Back Home
+                </Button>
+            )}
+        />
     )
 }
 
