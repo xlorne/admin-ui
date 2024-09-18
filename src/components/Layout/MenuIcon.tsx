@@ -1,20 +1,32 @@
 import React from 'react';
-import Icon from '@ant-design/icons'
-import * as icons from '@ant-design/icons'
+import Icon, * as icons from '@ant-design/icons'
 
 
-interface MenuProps {
+interface MenuIconProps {
     icon: string
+    className?: string;
+    style?: React.CSSProperties;
+    onClick?: () => void;
 }
 
-const Menus: React.FC<MenuProps> = (props) => {
+const MenuIcon: React.FC<MenuIconProps> = (props) => {
     if (props.icon === '-') {
         return <></>
     }
 
+    // @ts-ignore
+    const component = icons[props.icon];
+
     if (props.icon) {
-        // @ts-ignore
-        return <Icon component={icons[props.icon]} />
+
+        return (
+            <Icon
+                onClick={props.onClick}
+                className={props.className}
+                style={props.style}
+                component={component}
+            />
+        )
     } else {
         return <></>
     }
@@ -27,7 +39,7 @@ export async function loadLayoutMenus(response: any) {
             return [];
         }
         const fetchMenu = (data: any) => {
-            data.icon = <Menus icon={data.icon} />;
+            data.icon = <MenuIcon icon={data.icon}/>;
             data.children = data.children || [];
             data.children.forEach((item: any) => {
                 fetchMenu(item);
@@ -63,3 +75,5 @@ export async function loadLayoutMenuAuthentications(response: any) {
     }
     return [];
 }
+
+export default MenuIcon;
