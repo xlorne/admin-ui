@@ -1,7 +1,7 @@
 import React, {Suspense, useEffect, useState} from "react";
 import {Button, Space, Spin} from "antd";
 import {ModalForm, PageContainer, ProForm, ProFormText} from "@ant-design/pro-components";
-import ProFormUploader from "@/components/ProFormUploader";
+import ProFormUploader from "src/components/Form/ProFormUploader";
 import {loadRemoteComponent, loadZipJsFileScript} from "@/utils/dynamicLoader";
 import {BugFilled} from "@ant-design/icons";
 import {useRoutesContext} from "@/components/Layout/RoutesProvider";

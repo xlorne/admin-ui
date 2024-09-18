@@ -1,4 +1,4 @@
-import {CrownFilled, SmileFilled} from "@ant-design/icons";
+import {BugFilled, CrownFilled, SmileFilled} from "@ant-design/icons";
 import React from "react";
 
 export const menus = [
@@ -23,6 +23,19 @@ export const menus = [
                 path: '/redux/test2',
                 name: '测试页面2',
                 page: 'redux/test2',
+            },
+        ],
+    },
+    {
+        path: '/test',
+        name: '界面测试',
+        icon: <BugFilled/>,
+        routes: [
+            {
+                path: '/test/test1',
+                name: '测试页面1',
+                page: 'test/test1',
+                roles: ['ROLE_ADMIN'],
             },
         ],
     },
