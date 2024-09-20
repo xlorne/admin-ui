@@ -3,8 +3,9 @@ import {loadPage} from "@/components/Layout/PageLoader";
 import {Route} from "react-router";
 import {menus} from "@/config/menus";
 import AccessControl from "@/utils/accessControl";
-import { cloneDeep } from 'lodash';
+import {cloneDeep} from 'lodash';
 import NotFount from "@/layout/pages/NotFount";
+import MenuIcon from "@/components/Layout/MenuIcon";
 
 const loadMenuRoute = (menu: any) => {
     if (menu.roles) {
@@ -85,7 +86,20 @@ export class MenuRouteManager {
         return this.routes;
     }
 
-    public getMenus() {
+    public getMenus(mapping: boolean = true) {
+
+        const menuMap = (menu: any) => {
+            if(mapping) {
+                if (menu.icon) {
+                    menu.icon = <MenuIcon icon={menu.icon}/>
+                }
+                if (menu.routes) {
+                    menu.routes = menu.routes.map(menuMap);
+                }
+            }
+            return menu;
+        }
+
         const accessFilter = (menu: any) => {
             if (menu.roles) {
                 return AccessControl.menuHasRole(menu);
@@ -102,13 +116,43 @@ export class MenuRouteManager {
             return [];
         }
         const newMenus = cloneDeep(this.menus);
-        return newMenus.filter((menu: any) => {
+        return newMenus.map(menuMap).filter((menu: any) => {
             return accessFilter(menu);
         });
     }
 
     public addMenu(menu: Menu) {
         this.menus.push(menu);
+        this.version++;
+    }
+
+    public updateMenu(menu: Menu) {
+        const updateMenu = (item: any) => {
+            if (item.path === menu.path) {
+                item = {
+                    ...item,
+                    ...menu
+                };
+            }
+            return item;
+        }
+
+        this.menus = this.menus.map(updateMenu);
+        this.version++;
+    }
+
+    public removeMenu(path: string) {
+        const removeMenu = (menu: any) => {
+            if (menu.path === path) {
+                return false;
+            }
+            if (menu.routes) {
+                menu.routes = menu.routes.filter(removeMenu);
+            }
+            return true;
+        }
+
+        this.menus = this.menus.filter(removeMenu);
         this.version++;
     }
 

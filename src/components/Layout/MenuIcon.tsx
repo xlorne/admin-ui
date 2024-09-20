@@ -16,9 +16,7 @@ const MenuIcon: React.FC<MenuIconProps> = (props) => {
 
     // @ts-ignore
     const component = icons[props.icon];
-
     if (props.icon) {
-
         return (
             <Icon
                 onClick={props.onClick}

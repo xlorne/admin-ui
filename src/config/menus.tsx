@@ -1,17 +1,38 @@
-import {CrownFilled, SmileFilled} from "@ant-design/icons";
+import {CrownFilled, MenuOutlined, SmileOutlined} from "@ant-design/icons";
 import React from "react";
+import Login from "@/pages/login";
+
+export const routes = [
+    {
+        path: '/login',
+        element: <Login/>,
+    },
+]
 
 export const menus = [
     {
         path: '/welcome',
         name: '欢迎',
-        icon: <SmileFilled/>,
+        icon: "SmileOutlined",
         page: 'welcome',
+    },
+    {
+        path: '/menu',
+        name: '菜单',
+        icon: "MenuOutlined",
+        roles: ['ROLE_ADMIN'],
+        routes: [
+            {
+                path: '/menu/index',
+                name: '菜单管理',
+                page: 'menu',
+            },
+        ],
     },
     {
         path: '/redux',
         name: '状态管理',
-        icon: <CrownFilled/>,
+        icon: "CrownFilled",
         routes: [
             {
                 path: '/redux/test1',
@@ -29,7 +50,7 @@ export const menus = [
     {
         path: '/dynamic',
         name: '动态加载',
-        icon: <CrownFilled/>,
+        icon: "CrownFilled",
         roles: ['ROLE_ADMIN'],
         routes: [
             {

@@ -25,7 +25,7 @@ const HomeLayout = () => {
     const username = localStorage.getItem('username');
 
     useEffect(() => {
-        const path = window.location.hash.replace('#', '');
+        const path = window.location.hash.replace('#', '') || welcomePath;
         setPathname(path);
         MenuRouteManager.getInstance().refresh();
         actionRef.current?.reload();
@@ -47,7 +47,6 @@ const HomeLayout = () => {
             }}
             menu={{
                 request: async () => {
-                    console.log('load menus ...');
                     return MenuRouteManager.getInstance().getMenus();
                 }
             }}
@@ -75,10 +74,12 @@ const HomeLayout = () => {
             actionsRender={(props) => {
                 return loadHeaderAction(props);
             }}
-            onPageChange={(location) => {
+            onPageChange={(location:any) => {
                 const token = localStorage.getItem('token');
                 if (!token) {
                     navigate(loginPath, {replace: true});
+                }else{
+                    navigate(location.pathname);
                 }
             }}
             menuItemRender={(item, dom) => (

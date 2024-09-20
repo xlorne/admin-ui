@@ -3,11 +3,11 @@ import {createHashRouter, RouterProvider} from 'react-router-dom';
 import {loadRemoteComponent, loadRemoteScript} from "@/utils/dynamicLoader";
 import {loadPage} from "@/components/Layout/PageLoader";
 import NotFount from "@/layout/pages/NotFount";
-import Login from "@/pages/login";
 import Layout from "@/layout/home";
 import {useDispatch} from "react-redux";
 import {refresh} from "@/store/MenuSlice";
 import {Menu, MenuRouteManager} from "@/components/Layout/MenuRouteManager";
+import {routes as localRoutes} from "@/config/menus";
 
 const RouteContext = createContext<any>(null);
 
@@ -45,18 +45,26 @@ const RoutesProvider: React.FC = () => {
                 }
             ]
         },
-        {
-            path: '/login',
-            element: <Login/>,
-        },
+        ...localRoutes
+
     ]);
 
     const addRoute = (newRoute: Router) => {
         setRoutes((prevRoutes) => [...prevRoutes, newRoute]);
     };
 
-    const addMenu = (newRoute: Menu) => {
-        MenuRouteManager.getInstance().addMenu(newRoute);
+    const addMenu = (newMenu: Menu) => {
+        MenuRouteManager.getInstance().addMenu(newMenu);
+        dispatch(refresh());
+    };
+
+    const updateMenu = (newMenu: Menu) => {
+        MenuRouteManager.getInstance().updateMenu(newMenu);
+        dispatch(refresh());
+    };
+
+    const removeMenu = (path: string) => {
+        MenuRouteManager.getInstance().removeMenu(path);
         dispatch(refresh());
     };
 
@@ -101,7 +109,7 @@ const RoutesProvider: React.FC = () => {
     const hashRoutes = createHashRouter(routes);
 
     return (
-        <RouteContext.Provider value={{addRoute, removeRoute, addDynamicComponentRoute, addPageRoute,addMenu}}>
+        <RouteContext.Provider value={{addRoute, removeRoute, addDynamicComponentRoute, addPageRoute,addMenu,removeMenu,updateMenu}}>
             <RouterProvider
                 router={hashRoutes}
             />
