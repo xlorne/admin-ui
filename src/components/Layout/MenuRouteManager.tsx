@@ -131,7 +131,8 @@ export class MenuRouteManager {
             if (item.path === menu.path) {
                 item = {
                     ...item,
-                    ...menu
+                    icon: menu.icon,
+                    name: menu.name,
                 };
             }
             return item;
