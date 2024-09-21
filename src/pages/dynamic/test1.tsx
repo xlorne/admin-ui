@@ -3,7 +3,6 @@ import {Button, Col, Input, Row, Select, Space, Spin} from "antd";
 import Editor from "@/components/Editor";
 import {PageContainer} from "@ant-design/pro-components";
 import loadComponent from "@/components/Layout/DynamicCode";
-import {BugFilled} from "@ant-design/icons";
 import {useRoutesContext} from "@/components/Layout/RoutesProvider";
 
 const Test1 = () => {
@@ -43,7 +42,7 @@ const Test1 = () => {
                 addMenu({
                     path: '/test',
                     name: '测试页面',
-                    icon: <BugFilled/>,
+                    icon: 'BugFilled',
                     routes: [
                         {
                             path: '/test/test1',

@@ -3,7 +3,6 @@ import {Button, Space, Spin} from "antd";
 import {ModalForm, PageContainer, ProForm, ProFormText} from "@ant-design/pro-components";
 import ProFormUploader from "@/components/Form/ProFormUploader";
 import {loadRemoteComponent, loadZipJsFileScript} from "@/utils/dynamicLoader";
-import {BugFilled} from "@ant-design/icons";
 import {useRoutesContext} from "@/components/Layout/RoutesProvider";
 import Role from "@/pages/role";
 
@@ -50,7 +49,7 @@ const Test2 = () => {
                    addMenu({
                         path: '/test',
                         name:'测试页面',
-                        icon: <BugFilled/>,
+                        icon: 'BugFilled',
                         routes:[
                             {
                                 path: '/test/test1',
