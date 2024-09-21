@@ -4,7 +4,6 @@ import './index.scss';
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
 import {PageContainer} from "@ant-design/pro-components";
-import AccessProvider from "@/components/AccessProvider";
 import RoleControl from "@/utils/RoleControl";
 
 const Index = () => {
@@ -13,25 +12,25 @@ const Index = () => {
     const username = localStorage.getItem('username');
 
     return (
-        <AccessProvider>
-            <PageContainer>
+        <PageContainer>
 
-                <div className="App">
-                    <header className="App-header">
-                        <img src={logo} className="App-logo" alt="logo"/>
-                        <p>
-                            hi {username} , Redux counter: {counter}, Roles: {RoleControl.roles().map(item => (
-                            <label style={{
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo"/>
+                    <p>
+                        hi {username} , Redux counter: {counter}, Roles: {RoleControl.roles().map(item => (
+                        <label
+                            key={item}
+                            style={{
                                 margin: '0 5px',
                                 padding: '5px',
                             }}>{item}</label>
-                        ))}
-                        </p>
+                    ))}
+                    </p>
 
-                    </header>
-                </div>
-            </PageContainer>
-        </AccessProvider>
+                </header>
+            </div>
+        </PageContainer>
 
     );
 }
