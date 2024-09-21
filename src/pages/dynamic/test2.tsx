@@ -5,6 +5,7 @@ import ProFormUploader from "@/components/Form/ProFormUploader";
 import {loadRemoteComponent, loadZipJsFileScript} from "@/utils/dynamicLoader";
 import {BugFilled} from "@ant-design/icons";
 import {useRoutesContext} from "@/components/Layout/RoutesProvider";
+import Role from "@/pages/role";
 
 
 const Test2 = () => {
@@ -113,6 +114,27 @@ const Test2 = () => {
                         }}
                     >
                         上传zip组件到菜单
+                    </Button>
+
+                    <Button
+                        onClick={() => {
+                            addMenu({
+                                path: '/role',
+                                name:'权限管理',
+                                icon: 'BugFilled',
+                                routes:[
+                                    {
+                                        path: '/role/index',
+                                        element: (
+                                            <Role/>
+                                        ),
+                                        name:'权限测试',
+                                    }
+                                ]
+                            });
+                        }}
+                    >
+                        上传权限组件到菜单
                     </Button>
 
                 </Space>

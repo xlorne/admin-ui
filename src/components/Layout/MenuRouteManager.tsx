@@ -66,7 +66,7 @@ export interface Menu {
     // 菜单名称
     name: string,
     // 菜单图标
-    icon?: React.ReactNode | string,
+    icon?: string,
     // 子菜单
     routes?: Menu[],
     // 所需任意角色
