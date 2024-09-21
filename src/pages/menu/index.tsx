@@ -43,6 +43,7 @@ const Menu = () => {
                 item.routes.map(fetchMenu);
                 item.children = item.routes;
             }
+            item.key = item.path;
 
             if (item.name) {
                 item.title = (

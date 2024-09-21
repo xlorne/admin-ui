@@ -36,7 +36,7 @@ const RoutesProvider: React.FC = () => {
     const dispatch = useDispatch();
     const [routes, setRoutes] = useState<Router[]>([
         {
-            path: '/',
+            path: '/*',
             element: <Layout/>,
             children: [
                 {

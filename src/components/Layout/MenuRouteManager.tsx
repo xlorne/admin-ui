@@ -4,7 +4,6 @@ import {Route} from "react-router";
 import {menus} from "@/config/menus";
 import RoleControl from "@/utils/RoleControl";
 import {cloneDeep} from 'lodash';
-import NotFount from "@/layout/pages/NotFount";
 import MenuIcon from "@/components/Layout/MenuIcon";
 
 const loadMenuRoute = (menu: Menu): any => {
@@ -83,7 +82,6 @@ export class MenuRouteManager {
             return this.routes;
         }
         this.routes = this.menus.map((menu: any) => loadMenuRoute(menu));
-        this.routes.push(<Route path={"/*"} key={"404"} element={<NotFount/>}/>)
         this.currentVersion = this.version
         return this.routes;
     }

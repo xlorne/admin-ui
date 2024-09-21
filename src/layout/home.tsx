@@ -1,6 +1,6 @@
 import {ActionType, ProLayout} from '@ant-design/pro-components';
 import React, {useEffect, useRef, useState} from 'react';
-import {Routes} from "react-router";
+import {Route, Routes} from "react-router";
 import {useNavigate} from "react-router-dom";
 import {MenuRouteManager} from "@/components/Layout/MenuRouteManager";
 import AvatarHeader from "@/components/Layout/AvatarHeader";
@@ -9,6 +9,7 @@ import {config} from "@/config/theme";
 import "./home.scss";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
+import NotFount from "@/layout/pages/NotFount";
 
 const welcomePath = config.welcomePath;
 const loginPath = config.loginPath;
@@ -96,6 +97,7 @@ const HomeLayout = () => {
         >
             <Routes>
                 {MenuRouteManager.getInstance().getRoutes()}
+                <Route path={"/*"} key={"404"} element={<NotFount/>}/>
             </Routes>
         </ProLayout>
     );

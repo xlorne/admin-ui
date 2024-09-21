@@ -4,7 +4,7 @@ import {Spin} from "antd";
 export const loadPage = (pageName: string) => {
     const PageComponent = lazy(() => import(`@/pages/${pageName}`));
     return (
-        <Suspense fallback={<Spin size="large" tip="Loading"/>}>
+        <Suspense fallback={<Spin size="large" tip="Loading"><div style={{minHeight:100}}/></Spin>} >
             <PageComponent/>
         </Suspense>
     );
