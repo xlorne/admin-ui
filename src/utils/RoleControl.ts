@@ -1,6 +1,5 @@
-class AccessControl {
-
-    static menuHasRole: (menu: any) => boolean = (menu: any) => {
+class RoleControl {
+    static menuHasRole(menu: any): boolean {
         const authorities = localStorage.getItem('authorities');
         const authentications = authorities ? JSON.parse(authorities as string) : [];
 
@@ -20,7 +19,11 @@ class AccessControl {
         return true;
     }
 
-    static hasRole: (roles: string[]) => boolean = (roles: string[]) => {
+    static hasRole(roles: string[]): boolean {
+        if (!roles) {
+            return true;
+        }
+
         const authorities = localStorage.getItem('authorities');
         const authentications = authorities ? JSON.parse(authorities as string) : [];
 
@@ -34,4 +37,5 @@ class AccessControl {
 
 }
 
-export default AccessControl;
+
+export default RoleControl;

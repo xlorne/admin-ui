@@ -1,4 +1,3 @@
-import {CrownFilled, MenuOutlined, SmileOutlined} from "@ant-design/icons";
 import React from "react";
 import Login from "@/pages/login";
 
@@ -26,6 +25,19 @@ export const menus = [
                 path: '/menu/index',
                 name: '菜单管理',
                 page: 'menu',
+            },
+        ],
+    },
+    {
+        path: '/role',
+        name: '权限',
+        icon: "MenuOutlined",
+        roles: ['ROLE_ADMIN'],
+        routes: [
+            {
+                path: '/role/index',
+                name: '权限管理',
+                page: 'role',
             },
         ],
     },

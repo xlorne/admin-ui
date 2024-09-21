@@ -46,7 +46,6 @@ const RoutesProvider: React.FC = () => {
             ]
         },
         ...localRoutes
-
     ]);
 
     const addRoute = (newRoute: Router) => {
@@ -91,10 +90,13 @@ const RoutesProvider: React.FC = () => {
                 });
             })
         }
+
         const NewPage = lazy(async () => {
             const Component = await dynamicLoadComponent(router.remoteUrl, router.scope, router.module);
             return {default: Component};
         });
+
+
         const newRoute = {
             path: router.path,
             element: (
@@ -109,7 +111,8 @@ const RoutesProvider: React.FC = () => {
     const hashRoutes = createHashRouter(routes);
 
     return (
-        <RouteContext.Provider value={{addRoute, removeRoute, addDynamicComponentRoute, addPageRoute,addMenu,removeMenu,updateMenu}}>
+        <RouteContext.Provider
+            value={{addRoute, removeRoute, addDynamicComponentRoute, addPageRoute, addMenu, removeMenu, updateMenu}}>
             <RouterProvider
                 router={hashRoutes}
             />

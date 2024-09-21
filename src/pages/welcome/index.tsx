@@ -4,7 +4,7 @@ import './index.scss';
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
 import {PageContainer} from "@ant-design/pro-components";
-import Access from "@/components/Assess";
+import Access from "@/components/Access";
 
 const Index = () => {
 
@@ -17,14 +17,16 @@ const Index = () => {
                 hi, admin manager
             </Access>
 
+
             <div className="App">
-                <header className="App-header">
+                <header className="App-header">o
                     <img src={logo} className="App-logo" alt="logo"/>
                     <p>
                         Redux counter: {counter}
                     </p>
                 </header>
             </div>
+
         </PageContainer>
     );
 }

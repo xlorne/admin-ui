@@ -1,14 +1,14 @@
 import React from "react";
-import AccessControl from "@/utils/accessControl";
+import RoleControl from "@/utils/RoleControl";
 
-interface AccessProps {
+export interface AccessProps {
     children?: React.ReactNode;
     hasRole: string[];
 }
 
 const Access: React.FC<AccessProps> = (props) => {
     const {hasRole} = props;
-    if (AccessControl.hasRole(hasRole)) {
+    if (RoleControl.hasRole(hasRole)) {
         return (
             <>
                 {props.children}

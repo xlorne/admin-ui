@@ -2,14 +2,14 @@ import React from "react";
 import {loadPage} from "@/components/Layout/PageLoader";
 import {Route} from "react-router";
 import {menus} from "@/config/menus";
-import AccessControl from "@/utils/accessControl";
+import RoleControl from "@/utils/RoleControl";
 import {cloneDeep} from 'lodash';
 import NotFount from "@/layout/pages/NotFount";
 import MenuIcon from "@/components/Layout/MenuIcon";
 
 const loadMenuRoute = (menu: any) => {
     if (menu.roles) {
-        if (!AccessControl.menuHasRole(menu)) {
+        if (!RoleControl.menuHasRole(menu)) {
             return null;
         }
     }
@@ -102,8 +102,9 @@ export class MenuRouteManager {
 
         const accessFilter = (menu: any) => {
             if (menu.roles) {
-                return AccessControl.menuHasRole(menu);
+                return RoleControl.menuHasRole(menu);
             }
+
             if (menu.routes) {
                 menu.routes = menu.routes.filter((route: any) => {
                     return accessFilter(route);
