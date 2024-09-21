@@ -11,15 +11,9 @@ const renderWithAccess = (child: any): any => {
     }
     if (child.props) {
 
-        for (let i = 0; i < accessHandlers.length; i++) {
-            if (accessHandlers[i].match(child)) {
-                return accessHandlers[i].handle(child);
-            }
-        }
-
         // @ts-ignore
         if (child.props.children) {
-            return React.cloneElement(child, {
+            child = React.cloneElement(child, {
                 ...child.props,
                 // @ts-ignore
                 children: React.Children.map(child.props.children, (item: any) => {
@@ -27,6 +21,13 @@ const renderWithAccess = (child: any): any => {
                 })
             });
         }
+
+        for (let i = 0; i < accessHandlers.length; i++) {
+            if (accessHandlers[i].match(child)) {
+                return accessHandlers[i].handle(child);
+            }
+        }
+
         return child;
     }
     return null;
