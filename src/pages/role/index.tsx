@@ -10,19 +10,33 @@ const Role = () => {
     return (
         <AccessProvider>
             <PageContainer>
-                AccessProvider test <p/>
+                <h3>AccessProvider Test Page</h3>
 
-                <Access hasRole={['ROLE_ADMIN']}>
-                    hi, admin manager
+                <Access isNotRoles>
+                    isNotRoles
                 </Access>
 
-                <div>
-                    <Button>No Role</Button>
-                    <Button has-role={['ROLE_ADMIN2']}>ROLE_ADMIN2</Button>
-                </div>
+                <Access noAnyRoles={['ROLE_ADMIN']}>
+                    noAnyRoles={['ROLE_ADMIN']}
+                </Access>
 
-                <Button has-role={['ROLE_ADMIN']}>ROLE_ADMIN</Button>
+                <Access noRoles={['ROLE_ADMIN']}>
+                    noRoles={['ROLE_ADMIN']}
+                </Access>
 
+                <Access hasRoles={['ROLE_ADMIN']}>
+                    hasRoles={['ROLE_ADMIN']}
+                </Access>
+
+                <Access hasAnyRoles={['ROLE_ADMIN']}>
+                    hasAnyRoles={['ROLE_ADMIN']}
+                </Access>
+
+                <Button has-roles={['ROLE_ADMIN']}>Has Roles ['ROLE_ADMIN']</Button>
+                <Button has-any-roles={['ROLE_ADMIN', 'ROLE_USER']}>Has Any Roles ['ROLE_ADMIN','ROLE_USER']</Button>
+                <Button not-roles>no any roles</Button>
+                <Button no-roles={['ROLE_ADMIN']}>No Roles ['ROLE_ADMIN']</Button>
+                <Button no-any-roles={['ROLE_ADMIN', 'ROLE_USER']}>No Any Roles ['ROLE_ADMIN','ROLE_USER']</Button>
             </PageContainer>
         </AccessProvider>
     )

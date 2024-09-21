@@ -20,6 +20,8 @@ export function initUser(user: {
     const {username, token, authorities, avatar} = user;
     localStorage.setItem('username', username);
     localStorage.setItem('token', token);
-    localStorage.setItem('authorities', JSON.stringify(authorities));
+    if(authorities) {
+        localStorage.setItem('authorities', JSON.stringify(authorities));
+    }
     localStorage.setItem('avatar', avatar || "/logo.png");
 }

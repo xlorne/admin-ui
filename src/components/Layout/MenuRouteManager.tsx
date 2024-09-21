@@ -6,9 +6,30 @@ import RoleControl from "@/utils/RoleControl";
 import {cloneDeep} from 'lodash';
 import MenuIcon from "@/components/Layout/MenuIcon";
 
+const accessFilter = (menu: Menu): boolean => {
+    if (menu.roles) {
+        if (menu.path === '/') {
+            return true;
+        }
+
+        if (menu.roles) {
+            return RoleControl.anyRoles(menu.roles);
+        }
+        return true;
+    }
+
+    if (menu.routes) {
+        menu.routes = menu.routes.filter((route: any) => {
+            return accessFilter(route);
+        });
+        return menu.routes.length > 0;
+    }
+    return true;
+}
+
 const loadMenuRoute = (menu: Menu): any => {
     if (menu.roles) {
-        if (!RoleControl.menuHasRole(menu)) {
+        if (!accessFilter(menu)) {
             return null;
         }
     }
@@ -38,13 +59,21 @@ const loadMenuRoute = (menu: Menu): any => {
 
 
 export interface Menu {
+    // 路由路径
     path: string,
+    // 界面组件
     element: React.ReactNode,
+    // 菜单名称
     name: string,
+    // 菜单图标
     icon?: React.ReactNode | string,
+    // 子菜单
     routes?: Menu[],
+    // 所需任意角色
     roles?: string[],
+    // 父菜单路径
     parentPath?: string
+    // 页面路径，通过PageLoader加载到element
     page?: string
 }
 
@@ -99,19 +128,7 @@ export class MenuRouteManager {
             return menu;
         }
 
-        const accessFilter = (menu: any) => {
-            if (menu.roles) {
-                return RoleControl.menuHasRole(menu);
-            }
 
-            if (menu.routes) {
-                menu.routes = menu.routes.filter((route: any) => {
-                    return accessFilter(route);
-                });
-                return menu.routes.length > 0;
-            }
-            return true;
-        }
         if (this.menus.length === 0) {
             return [];
         }
