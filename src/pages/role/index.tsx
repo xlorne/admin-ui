@@ -18,10 +18,10 @@ const Role = () => {
 
                 <div>
                     <Button>No Role</Button>
-                    <Button access-hasRole={['ROLE_ADMIN2']}>ROLE_ADMIN2</Button>
+                    <Button has-role={['ROLE_ADMIN2']}>ROLE_ADMIN2</Button>
                 </div>
 
-                <Button access-hasRole={['ROLE_ADMIN']}>ROLE_ADMIN</Button>
+                <Button has-role={['ROLE_ADMIN']}>ROLE_ADMIN</Button>
 
             </PageContainer>
         </AccessProvider>

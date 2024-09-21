@@ -7,7 +7,7 @@ import {cloneDeep} from 'lodash';
 import NotFount from "@/layout/pages/NotFount";
 import MenuIcon from "@/components/Layout/MenuIcon";
 
-const loadMenuRoute = (menu: any) => {
+const loadMenuRoute = (menu: Menu): any => {
     if (menu.roles) {
         if (!RoleControl.menuHasRole(menu)) {
             return null;
@@ -45,6 +45,8 @@ export interface Menu {
     icon?: React.ReactNode | string,
     routes?: Menu[],
     roles?: string[],
+    parentPath?: string
+    page?: string
 }
 
 // 菜单路由管理器
@@ -87,9 +89,8 @@ export class MenuRouteManager {
     }
 
     public getMenus(mapping: boolean = true) {
-
         const menuMap = (menu: any) => {
-            if(mapping) {
+            if (mapping) {
                 if (menu.icon) {
                     menu.icon = <MenuIcon icon={menu.icon}/>
                 }
@@ -123,17 +124,44 @@ export class MenuRouteManager {
     }
 
     public addMenu(menu: Menu) {
-        this.menus.push(menu);
+        if (menu.parentPath) {
+            const updateMenu = (item: any) => {
+                if (item.path === menu.parentPath) {
+                    const routes = item.routes || [];
+                    if (menu.page) {
+                        menu.element = loadPage(menu.page);
+                    }
+                    routes.push(menu);
+                    item = {
+                        ...item,
+                        routes
+                    };
+                }
+                return item;
+            }
+            this.menus = this.menus.map(updateMenu);
+        } else {
+            this.menus.push(menu);
+        }
         this.version++;
     }
 
     public updateMenu(menu: Menu) {
-        const updateMenu = (item: any) => {
+        const updateMenu = (item: Menu) => {
+            const newMenu = {
+                icon: menu.icon,
+                name: menu.name,
+                page: menu.page,
+            } as any;
+
+            if (menu.page) {
+                newMenu.element = loadPage(menu.page);
+            }
+
             if (item.path === menu.path) {
                 item = {
                     ...item,
-                    icon: menu.icon,
-                    name: menu.name,
+                    ...newMenu
                 };
             }
             return item;

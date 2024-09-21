@@ -29,19 +29,6 @@ export const menus = [
         ],
     },
     {
-        path: '/role',
-        name: '权限',
-        icon: "MenuOutlined",
-        roles: ['ROLE_ADMIN'],
-        routes: [
-            {
-                path: '/role/index',
-                name: '权限管理',
-                page: 'role',
-            },
-        ],
-    },
-    {
         path: '/redux',
         name: '状态管理',
         icon: "CrownFilled",
