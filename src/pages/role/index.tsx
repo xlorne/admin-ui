@@ -1,7 +1,7 @@
 import React from "react";
 import {PageContainer} from "@ant-design/pro-components";
 import {Button} from "antd";
-import RoleProvider from "src/components/Permission/RoleProvider";
+import RoleProvider from "@/framework/Permission/RoleProvider";
 
 
 const Role = () => {

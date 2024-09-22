@@ -1,23 +1,23 @@
 import React, {Ref, useEffect, useImperativeHandle} from 'react';
 import * as monaco from 'monaco-editor';
 
-export interface MonacoEditorActionType {
+export interface ProFormCodeActionType {
   resetValue: (value: string) => void;
   getSelectedValue: () => string;
   getValue:()=>string;
 }
 
-interface MonacoEditorProps {
+interface ProFormCodeProps {
   language?: string,
   value?: string,
   onChange?: (value: string) => void,
   onSelectedRun?: (value: string) => void;
   style?: React.CSSProperties;
   readonly?:boolean;
-  actionRef?: Ref<MonacoEditorActionType|undefined>;
+  actionRef?: Ref<ProFormCodeActionType|undefined>;
 }
 
-const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
+const ProFormCode: React.FC<ProFormCodeProps> = (props) => {
   const language = props.language || 'sql';
 
   const actionRef = props.actionRef;
@@ -106,4 +106,4 @@ const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   );
 };
 
-export default MonacoEditor;
+export default ProFormCode;

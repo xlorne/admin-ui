@@ -1,9 +1,9 @@
 import React, {Suspense, useState} from "react";
 import {Button, Col, Input, Row, Select, Space, Spin} from "antd";
-import Editor from "@/components/Editor";
+import ProFormCode from "@/components/Form/ProFormCode";
 import {PageContainer} from "@ant-design/pro-components";
-import loadComponent from "@/components/Layout/DynamicCode";
-import {useRoutesContext} from "@/components/Layout/RoutesProvider";
+import loadComponent from "@/framework/DynamicLoad/DynamicCode";
+import {useRoutesContext} from "@/framework/Routes/RoutesProvider";
 
 const Test1 = () => {
 
@@ -92,7 +92,7 @@ const Test1 = () => {
         >
             <Row>
                 <Col span={12}>
-                    <Editor
+                    <ProFormCode
                         value={code}
                         style={{
                             height: 500,

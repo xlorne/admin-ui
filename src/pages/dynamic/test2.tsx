@@ -3,7 +3,7 @@ import {Button, Space, Spin} from "antd";
 import {ModalForm, PageContainer, ProForm, ProFormText} from "@ant-design/pro-components";
 import ProFormUploader from "@/components/Form/ProFormUploader";
 import {loadRemoteComponent, loadZipJsFileScript} from "@/utils/dynamicLoader";
-import {useRoutesContext} from "@/components/Layout/RoutesProvider";
+import {useRoutesContext} from "@/framework/Routes/RoutesProvider";
 import Role from "@/pages/role";
 
 

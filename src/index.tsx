@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
 import reportWebVitals from './reportWebVitals';
-import RoutesProvider from "@/components/Layout/RoutesProvider";
+import RoutesProvider from "@/framework/Routes/RoutesProvider";
 import {Provider} from "react-redux";
 import store from "@/store/Redux";
 import {ConfigProvider} from "antd";
 import zhCN from 'antd/es/locale/zh_CN';
 import {theme} from "@/config/theme";
+import './index.scss';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

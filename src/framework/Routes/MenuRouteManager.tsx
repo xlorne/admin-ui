@@ -1,10 +1,10 @@
 import React from "react";
-import {loadPage} from "@/components/Layout/PageLoader";
+import {loadPage} from "@/framework/DynamicLoad/PageLoader";
 import {Route} from "react-router";
 import {menus} from "@/config/menus";
 import RoleControl from "@/utils/RoleControl";
 import {cloneDeep} from 'lodash';
-import MenuIcon from "@/components/Layout/MenuIcon";
+import Index from "@/components/View/MenuIcon";
 
 const accessFilter = (menu: Menu): boolean => {
     if (menu.roles) {
@@ -119,7 +119,7 @@ export class MenuRouteManager {
         const menuMap = (menu: any) => {
             if (mapping) {
                 if (menu.icon) {
-                    menu.icon = <MenuIcon icon={menu.icon}/>
+                    menu.icon = <Index icon={menu.icon}/>
                 }
                 if (menu.routes) {
                     menu.routes = menu.routes.map(menuMap);

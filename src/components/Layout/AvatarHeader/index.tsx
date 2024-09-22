@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import {Avatar, message} from "antd";
-import HeaderDropdown from "@/components/HeaderDropdown";
+import HeaderDropdown from "@/components/Layout/HeaderDropdown";
 import {LogoutOutlined, SettingOutlined} from "@ant-design/icons";
 import {ModalForm, ProFormText} from "@ant-design/pro-components";
 import {clearUser} from "@/api/account";

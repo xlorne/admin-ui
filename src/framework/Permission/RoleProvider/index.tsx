@@ -1,5 +1,5 @@
 import React from "react";
-import RoleManager from "@/components/Permission/RoleProvider/RoleManager";
+import RoleManager from "@/framework/Permission/RoleProvider/RoleManager";
 
 interface RoleProviderProps {
     children: React.ReactNode;

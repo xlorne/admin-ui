@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import {ModalForm, PageContainer, ProCard, ProForm, ProFormText} from "@ant-design/pro-components";
-import {MenuRouteManager} from "@/components/Layout/MenuRouteManager";
+import {MenuRouteManager} from "@/framework/Routes/MenuRouteManager";
 import {Popconfirm, Space, Tree} from "antd";
 import {DeleteFilled, DownOutlined, EditFilled, PlusOutlined} from "@ant-design/icons";
-import {useRoutesContext} from "@/components/Layout/RoutesProvider";
+import {useRoutesContext} from "@/framework/Routes/RoutesProvider";
 import ProFormIcons from "@/components/Form/ProFormIcons";
-import MenuIcon from "@/components/Layout/MenuIcon";
+import Index from "@/components/View/MenuIcon";
 import "./index.scss";
 
 const Menu = () => {
@@ -37,7 +37,7 @@ const Menu = () => {
         const fetchMenu = (item: any) => {
             if (item.icon) {
                 item.iconKey = item.icon;
-                item.icon = <MenuIcon icon={item.icon}/>
+                item.icon = <Index icon={item.icon}/>
             }
             if (item.routes) {
                 item.routes.map(fetchMenu);

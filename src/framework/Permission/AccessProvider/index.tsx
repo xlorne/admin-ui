@@ -1,5 +1,5 @@
 import React from "react";
-import {accessHandlers} from "@/components/Permission/AccessProvider/handler";
+import {accessHandlers} from "@/framework/Permission/AccessProvider/handler";
 
 interface AccessProviderProps {
     children: React.ReactNode;

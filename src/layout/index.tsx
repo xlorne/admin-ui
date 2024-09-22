@@ -2,11 +2,11 @@ import {ActionType, ProLayout} from '@ant-design/pro-components';
 import React, {useEffect, useRef, useState} from 'react';
 import {Route, Routes} from "react-router";
 import {useNavigate} from "react-router-dom";
-import {MenuRouteManager} from "@/components/Layout/MenuRouteManager";
+import {MenuRouteManager} from "@/framework/Routes/MenuRouteManager";
 import AvatarHeader from "@/components/Layout/AvatarHeader";
 import {loadHeaderAction} from "@/components/Layout/HeaderAction";
 import {config} from "@/config/theme";
-import "./home.scss";
+import "./index.scss";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
 import NotFount from "@/layout/pages/NotFount";
@@ -14,7 +14,7 @@ import NotFount from "@/layout/pages/NotFount";
 const welcomePath = config.welcomePath;
 const loginPath = config.loginPath;
 
-const HomeLayout = () => {
+const Layout = () => {
 
     const actionRef = useRef<ActionType>();
     const [pathname, setPathname] = useState(welcomePath);
@@ -103,4 +103,4 @@ const HomeLayout = () => {
     );
 };
 
-export default HomeLayout;
+export default Layout;
