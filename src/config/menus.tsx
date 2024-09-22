@@ -16,6 +16,12 @@ export const menus = [
         page: 'welcome',
     },
     {
+        path: '/role',
+        name: '权限',
+        icon: "SmileOutlined",
+        page: 'role',
+    },
+    {
         path: '/menu',
         name: '菜单',
         icon: "MenuOutlined",

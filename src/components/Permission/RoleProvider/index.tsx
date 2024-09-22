@@ -1,7 +1,7 @@
 import React from "react";
-import {accessHandlers} from "@/components/AccessProvider/handler";
+import RoleManager from "@/components/Permission/RoleProvider/RoleManager";
 
-interface AccessProviderProps {
+interface RoleProviderProps {
     children: React.ReactNode;
 }
 
@@ -22,20 +22,23 @@ const renderWithAccess = (child: any): any => {
             });
         }
 
-        for (let i = 0; i < accessHandlers.length; i++) {
-            if (accessHandlers[i].match(child)) {
-                return accessHandlers[i].handle(child);
+        const roleKey = 'role-key';
+        const key = child.props && child.props[roleKey];
+        if(key) {
+            if (RoleManager.getInstances().hasRole(key)) {
+                return child;
+            }else {
+                return null;
             }
         }
-
         return child;
     }
     return null;
 };
 
-const AccessProvider: React.FC<AccessProviderProps> = (props) => {
+const RoleProvider: React.FC<RoleProviderProps> = (props) => {
     const {children} = props;
     return React.Children.map(children, child => renderWithAccess(child));
 };
 
-export default AccessProvider;
+export default RoleProvider;
