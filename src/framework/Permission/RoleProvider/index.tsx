@@ -10,7 +10,6 @@ const renderWithAccess = (child: any): any => {
         return child;
     }
     if (child.props) {
-
         // @ts-ignore
         if (child.props.children) {
             child = React.cloneElement(child, {

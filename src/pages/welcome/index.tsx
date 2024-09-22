@@ -3,8 +3,8 @@ import logo from '@/assets/logo.svg';
 import './index.scss';
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/Redux";
-import {PageContainer} from "@ant-design/pro-components";
 import RoleControl from "@/utils/RoleControl";
+import Page from "@/components/Layout/Page";
 
 const Index = () => {
 
@@ -12,8 +12,7 @@ const Index = () => {
     const username = localStorage.getItem('username');
 
     return (
-        <PageContainer>
-
+        <Page enablePageContainer={true}>
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
@@ -27,11 +26,9 @@ const Index = () => {
                             }}>{item}</label>
                     ))}
                     </p>
-
                 </header>
             </div>
-        </PageContainer>
-
+        </Page>
     );
 }
 
