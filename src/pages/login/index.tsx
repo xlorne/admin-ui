@@ -13,6 +13,7 @@ import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {refresh} from '@/store/MenuSlice';
 import {config} from "@/config/theme";
+import {message} from "antd";
 
 const loginPage = () => {
     const navigate = useNavigate();
@@ -64,6 +65,8 @@ const loginPage = () => {
                             localStorage.removeItem('l-username');
                             localStorage.removeItem('l-password');
                         }
+                    }else{
+                        message.error('登录失败，请检查用户名和密码！');
                     }
                 }}
             >

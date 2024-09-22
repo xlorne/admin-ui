@@ -9,7 +9,7 @@ module.exports = merge(common, {
         proxy: [
             {
                 context: ['/api','/open','/user'],
-                target: 'http://192.168.3.200:9090',
+                target: 'http://127.0.0.1:8090',
                 changeOrigin: true,
                 logLevel: 'debug',
                 onProxyReq: (proxyReq, req, res) => {
